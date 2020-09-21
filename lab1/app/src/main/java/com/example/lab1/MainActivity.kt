@@ -3,7 +3,9 @@ package com.example.lab1
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.view.get
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.text.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +30,12 @@ class MainActivity : AppCompatActivity() {
                 val toast = Toast.makeText(applicationContext, text, duration)
                 toast.show()
             }
+        }
+        button_result.setOnClickListener {
+            var text_to_transform = result_Text.text.toString()
+            var int_value = text_to_transform.toDouble()
+            int_value =int_value + 4
+            result_Text2.text=int_value.toString()
         }
 
         button_1.setOnClickListener {
@@ -75,8 +83,38 @@ class MainActivity : AppCompatActivity() {
             result_Text.text = myString.dropLast(1)
         }
 
-        button_dot.setOnClickListener {
+        fun dot_press(){
+            val myString = result_Text.text
+            var dot_counter = 0
+            if(myString.length==0){
+                val text = "Dot can't be the first symbol!"
+                val duration = Toast.LENGTH_SHORT
+                val toast = Toast.makeText(applicationContext, text, duration)
+                toast.show()
+                return
+            }
+            else{
+                for(x in myString){
+                    if(x=='.')
+                        dot_counter += 1
+                    if(dot_counter==1){
+                        val text = "There can not be 2 dots"
+                        val duration = Toast.LENGTH_SHORT
+                        val toast = Toast.makeText(applicationContext, text, duration)
+                        toast.show()
+                        return
+                    }
+                }
+            }
             set_text(".")
         }
+
+        button_dot.setOnClickListener {
+            dot_press()
+        }
+
+        /*spinner_value.setOnClickListener(){
+            resultText.text=spinner_value[0].toString()
+        }*/
     }
 }
