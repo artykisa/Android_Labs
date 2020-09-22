@@ -33,9 +33,18 @@ class MainActivity : AppCompatActivity() {
         }
         button_result.setOnClickListener {
             var text_to_transform = result_Text.text.toString()
-            var int_value = text_to_transform.toDouble()
-            int_value =int_value + 4
-            result_Text2.text=int_value.toString()
+            if(text_to_transform==""){
+                val text = "No data!"
+                val duration = Toast.LENGTH_SHORT
+                val toast = Toast.makeText(applicationContext, text, duration)
+                toast.show()
+                result_Text2.text=""
+            }
+            else {
+                var int_value = text_to_transform.toDouble()
+                int_value = int_value + 4
+                result_Text2.text = int_value.toString()
+            }
         }
 
         button_1.setOnClickListener {
