@@ -12,10 +12,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //distance, weight, currency
+        /*distance, weight, currency
         val distance: List<String> = listOf("kilometer","meter","centimeter")
         val weight: List<String> = listOf("ton","kilogram","gram")
-        val currency: List<String> = listOf("BYN","DOLLAR","EURO")
+        val currency: List<String> = listOf("BYN","DOLLAR","EURO")*/
 
         fun set_text(x: String) {
             val sb = StringBuilder()
@@ -31,6 +31,15 @@ class MainActivity : AppCompatActivity() {
                 toast.show()
             }
         }
+
+        button_change.setOnClickListener {
+            var text_string_from = result_Text.text
+            var text_string_to = result_Text2.text
+            result_Text.text = text_string_to
+            result_Text2.text = text_string_from
+            // add for spinner
+        }
+
         button_result.setOnClickListener {
             var text_to_transform = result_Text.text.toString()
             if(text_to_transform==""){
