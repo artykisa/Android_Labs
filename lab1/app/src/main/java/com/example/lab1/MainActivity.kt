@@ -1,11 +1,15 @@
 package com.example.lab1
 
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.view.get
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.text.*
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -129,6 +133,47 @@ class MainActivity : AppCompatActivity() {
 
         button_dot.setOnClickListener {
             dot_press()
+        }
+
+        spinner_value.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(
+                parentView: AdapterView<*>?,
+                selectedItemView: View,
+                position: Int,
+                id: Long
+            ) {
+                if(spinner_value.selectedItem.toString()=="Weight"){
+                    val WeightList = resources.getStringArray(R.array.Weight)
+                    val adapter_weight = ArrayAdapter(
+                        this@MainActivity,
+                        android.R.layout.simple_spinner_item, WeightList
+                    )
+                    spinner_choose.adapter=adapter_weight
+                    spinner_choose2.adapter=adapter_weight
+                }
+                else if(spinner_value.selectedItem.toString()=="Distance"){
+                    val DistanceList = resources.getStringArray(R.array.Distance)
+                    val adapter_distance = ArrayAdapter(
+                        this@MainActivity,
+                        android.R.layout.simple_spinner_item, DistanceList
+                    )
+                    spinner_choose.adapter=adapter_distance
+                    spinner_choose2.adapter=adapter_distance
+                }
+                else{
+                    val CurencyList = resources.getStringArray(R.array.Currency)
+                    val adapter_curency = ArrayAdapter(
+                        this@MainActivity,
+                        android.R.layout.simple_spinner_item, CurencyList
+                    )
+                    spinner_choose.adapter=adapter_curency
+                    spinner_choose2.adapter=adapter_curency
+                }
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>?) {
+                result_Text2.text="JOPA"
+            }
         }
 
         /*spinner_value.setOnClickListener(){
