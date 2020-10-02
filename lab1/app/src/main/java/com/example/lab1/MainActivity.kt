@@ -55,7 +55,110 @@ class MainActivity : AppCompatActivity() {
             }
             else {
                 var int_value = text_to_transform.toDouble()
-                int_value = int_value + 4
+                if(spinner_value.selectedItem.toString()=="Weight"){
+                    if(spinner_choose2.selectedItem.toString()=="Gram"){
+                        if(spinner_choose.selectedItem.toString()=="Kilogram"){
+                            int_value /= 1000
+                        }
+                        else if(spinner_choose.selectedItem.toString()=="Gram"){
+                            int_value = int_value
+                        }
+                        else{
+                            int_value /= 1000000
+                        }
+                    }
+                    else if(spinner_choose2.selectedItem.toString()=="Kilogram"){
+                        if(spinner_choose.selectedItem.toString()=="Kilogram"){
+                            int_value = int_value
+                        }
+                        else if(spinner_choose.selectedItem.toString()=="Gram"){
+                            int_value = int_value * 1000
+                        }
+                        else{
+                            int_value /= 1000
+                        }
+                    }
+                    else{
+                        if(spinner_choose.selectedItem.toString()=="Kilogram"){
+                            int_value /= 1000
+                        }
+                        else if(spinner_choose.selectedItem.toString()=="Gram"){
+                            int_value /= 1000000
+                        }
+                        else{
+                            int_value = int_value
+                        }
+                    }
+                }
+                else if(spinner_value.selectedItem.toString()=="Distance"){
+                        if(spinner_choose2.selectedItem.toString()=="Centimeter"){
+                            if(spinner_choose.selectedItem.toString()=="Meter"){
+                                int_value /= 100
+                            }
+                            else if(spinner_choose.selectedItem.toString()=="Centimeter"){
+                                int_value = int_value
+                            }
+                            else{
+                                int_value /= 100000
+                            }
+                        }
+                        else if(spinner_choose2.selectedItem.toString()=="Meter"){
+                            if(spinner_choose.selectedItem.toString()=="Meter"){
+                                int_value = int_value
+                            }
+                            else if(spinner_choose.selectedItem.toString()=="Centimeter"){
+                                int_value = int_value * 100
+                            }
+                            else{
+                                int_value /= 1000
+                            }
+                        }
+                    else{
+                            if(spinner_choose.selectedItem.toString()=="Meter"){
+                                int_value *= 1000
+                            }
+                            else if(spinner_choose.selectedItem.toString()=="Centimeter"){
+                                int_value *= 100000
+                            }
+                            else{
+                                int_value = int_value
+                            }
+                        }
+                }
+                else {
+                    if (spinner_choose2.selectedItem.toString() == "BYN") {
+                        if (spinner_choose.selectedItem.toString() == "BYN") {
+                            int_value = int_value
+                        } else if (spinner_choose.selectedItem.toString() == "Dollar") {
+                            int_value /= 2.6
+                        } else {
+                            int_value /= 3.17
+                        }
+                    }
+                    else if (spinner_choose2.selectedItem.toString() == "Dollar") {
+                        if (spinner_choose.selectedItem.toString() == "BYN") {
+                            int_value *= 2.6
+                        }
+                        else if (spinner_choose.selectedItem.toString() == "Dollar") {
+                            int_value = int_value
+                        }
+                        else {
+                            int_value /= 1.17
+                        }
+                    }
+                    else{
+                        if (spinner_choose.selectedItem.toString() == "BYN") {
+                            int_value *= 3.1
+                        }
+                        else if (spinner_choose.selectedItem.toString() == "Dollar") {
+                            int_value = int_value * 1.17
+                        }
+                        else {
+                            int_value = int_value
+                        }
+                    }
+                }
+
                 result_Text2.text = int_value.toString()
             }
         }
