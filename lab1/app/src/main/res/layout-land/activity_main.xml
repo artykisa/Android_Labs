@@ -7,140 +7,29 @@
     android:background="#FFFFFF"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/button_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Result"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/result_Text"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="7dp"
-        android:gravity="center"
-        android:text="1"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/button_change"
-        app:layout_constraintEnd_toEndOf="@+id/result_Text2"
-        app:layout_constraintStart_toStartOf="@+id/result_Text2"
-        app:layout_constraintTop_toBottomOf="@+id/button_result" />
-
-    <Button
-        android:id="@+id/button_change"
-        android:layout_width="0dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="129dp"
-        android:layout_marginEnd="89dp"
-        android:layout_marginRight="89dp"
-        android:layout_marginBottom="128dp"
-        android:text="↑↓"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner_value"
-        app:layout_constraintEnd_toStartOf="@+id/fragment5"
-        app:layout_constraintStart_toEndOf="@+id/result_Text2"
-        app:layout_constraintTop_toTopOf="@+id/fragment5" />
-
-    <TextView
-        android:id="@+id/result_Text2"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
-        android:layout_marginBottom="128dp"
-        android:gravity="center"
-        android:text="1"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_change"
-        app:layout_constraintStart_toEndOf="@+id/spinner_value" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="145dp"
-        android:layout_marginLeft="145dp"
-        android:layout_marginTop="32dp"
-        android:text="Lab1 asikytra"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/resultText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="133dp"
-        android:layout_marginLeft="133dp"
-        android:layout_marginEnd="130dp"
-        android:layout_marginRight="130dp"
-        android:layout_marginBottom="7dp"
-        android:text="DUNK DRUNK"
-        app:layout_constraintBottom_toTopOf="@+id/fragment5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/button_change" />
-
-
-    <Spinner
-        android:id="@+id/spinner_choose"
-        android:layout_width="0dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="381dp"
-        android:layout_marginRight="381dp"
-        android:layout_marginBottom="13dp"
-        android:entries="@array/Weight"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinner_choose2"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_value" />
-
-    <Spinner
-        android:id="@+id/spinner_value"
-        android:layout_width="0dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="137dp"
-        android:layout_marginLeft="137dp"
-        android:layout_marginTop="63dp"
-        android:layout_marginBottom="64dp"
-        android:entries="@array/Values"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/result_Text2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/result_Text2" />
-
-    <Spinner
-        android:id="@+id/spinner_choose2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginBottom="7dp"
-        android:entries="@array/Weight"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/spinner_choose"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_value" />
-
     <fragment
-        android:id="@+id/fragment5"
+        android:id="@+id/fragment3"
         android:name="com.example.lab1.KeyboardFragment"
         android:layout_width="0dp"
-        android:layout_height="259dp"
-        android:layout_marginTop="51dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_height="359dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_change"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_keyboard" />
+        app:layout_constraintStart_toEndOf="@+id/fragment4"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
+    <fragment
+        android:id="@+id/fragment4"
+        android:name="com.example.lab1.ViewFragment"
+        android:layout_width="0dp"
+        android:layout_height="354dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fragment3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
