@@ -3,6 +3,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    signingConfigs {
+
+    full_premium {
+        storePassword '123'
+        keyAlias '123'
+        keyPassword '123'
+    }
+    }
     compileSdkVersion 29
 
     defaultConfig {
@@ -19,8 +27,47 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable true
+            signingConfig signingConfigs.debug
+        }
+//        premiun {
+//
+//        }
+    }
+    flavorDimensions "version"
+    productFlavors {
+        demo {
+            // Assigns this product flavor to the "version" flavor dimension.
+            // If you are using only one dimension, this property is optional,
+            // and the plugin automatically assigns all the module's flavors to
+            // that dimension.
+            dimension "version"
+            applicationIdSuffix ".demo"
+            versionNameSuffix "-demo"
+        }
+        full {
+            dimension "version"
+            applicationIdSuffix ".full"
+            versionNameSuffix "-full"
         }
     }
+//    sourceSets{
+//        release{
+//            java.srcDirs =['main/java']
+//            res.srcDirs = ['main/res']
+//            manifest.srcFile 'main/AndroidManifest.xml'
+//        }
+//        premiun{
+//            java.srcDirs =['premium/java']
+//            res.srcDirs = ['premium/res', 'src/premiun/res', 'src/premiun/res/']
+//            manifest.srcFile 'premium/AndroidManifest.xml'
+//        }
+//        full {
+//            res {
+//                srcDirs 'src/full/res', 'src/full/res/'
+//            }
+//        }
+   // }
 }
 
 dependencies {
