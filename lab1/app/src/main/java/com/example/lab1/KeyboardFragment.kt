@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.activityViewModels
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_keyboard.*
 import kotlinx.android.synthetic.main.fragment_keyboard.view.*
@@ -26,6 +27,8 @@ class KeyboardFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private val model: MyViewModel by activityViewModels<MyViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -45,51 +48,52 @@ class KeyboardFragment : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_keyboard, container, false)
 
         view.button__1.setOnClickListener {
-            (activity as MainActivity).set_text("1")
+            context?.let { it1 -> model.set_text("1", it1) }
         }
 
         view.button__2.setOnClickListener {
-            (activity as MainActivity).set_text("2")
+            context?.let { it1 -> model.set_text("2", context = it1) }
         }
 
         view.button__3.setOnClickListener {
-            (activity as MainActivity).set_text("3")
+            context?.let { it1 -> model.set_text("3", it1) }
         }
 
         view.button__4.setOnClickListener {
-            (activity as MainActivity).set_text("4")
+            context?.let { it1 -> model.set_text("4", it1) }
         }
 
         view.button__5.setOnClickListener {
-            (activity as MainActivity).set_text("5")
+            context?.let { it1 -> model.set_text("5", it1) }
         }
 
         view.button__6.setOnClickListener {
-            (activity as MainActivity).set_text("6")
+            context?.let { it1 -> model.set_text("6", it1) }
         }
 
         view.button__7.setOnClickListener {
-            (activity as MainActivity).set_text("7")
+            context?.let { it1 -> model.set_text("7", it1) }
         }
 
         view.button__8.setOnClickListener {
-            (activity as MainActivity).set_text("8")
+            context?.let { it1 -> model.set_text("8", it1) }
         }
 
         view.button__9.setOnClickListener {
-            (activity as MainActivity).set_text("9")
+            context?.let { it1 -> model.set_text("9", it1) }
         }
 
         view.button__0.setOnClickListener {
-            (activity as MainActivity).set_text("0")
+            context?.let { it1 -> model.set_text("0", it1) }
         }
 
         view.button__x.setOnClickListener {
-            (activity as MainActivity).x_press()
+            model.x_press()
         }
 
         view.button__dot.setOnClickListener {
-            (activity as MainActivity).dot_press()
+            context?.let { it1 -> model.dot_press(it1) }
+
         }
         return view
     }

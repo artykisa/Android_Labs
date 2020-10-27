@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_view.*
 import kotlinx.android.synthetic.main.fragment_view.view.*
@@ -28,10 +29,7 @@ class ViewFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-
-
-
-
+    private val model: MyViewModel by activityViewModels<MyViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +38,7 @@ class ViewFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,37 +59,42 @@ class ViewFragment : Fragment() {
                 id: Long
             ) {
                 if (view.spinner_value.selectedItem.toString() == "Weight") {
-                    val adapter_weight= activity.get_adapter_weight()
+                    val adapter_weight= context?.let { model.get_adapter_weight(it) }
                     view.spinner_choose.adapter = adapter_weight
                     view.spinner_choose2.adapter = adapter_weight
                 } else if (view.spinner_value.selectedItem.toString() == "Distance") {
-                    val adapter_distance= activity.get_adapter_distance()
+                    val adapter_distance= context?.let { model.get_adapter_distance(it) }
                     view.spinner_choose.adapter = adapter_distance
                     view.spinner_choose2.adapter = adapter_distance
                 } else {
-                    val adapter_curency= activity.get_adapter_currency()
+                    val adapter_curency= context?.let { model.get_adapter_currency(it) }
                     view.spinner_choose.adapter = adapter_curency
                     view.spinner_choose2.adapter = adapter_curency
                 }
             }
         }
 
+        fun refresh(){
+            view.result_Text.text = model.number
+            view.result_Text2.text = model.number_conv
+        }
+
         view.button_change.setOnClickListener {
-            var text_string_from = view.result_Text.text
-            var text_string_to = view.result_Text2.text
-            view.result_Text.text = text_string_to
-            view.result_Text2.text = text_string_from
+            model.change()
+            refresh()
             // add for spinner
         }
 
+
+
         view.button_result.setOnClickListener {
-            var text_to_transform = view.result_Text.text.toString()
+            var text_to_transform = model.number
             if(text_to_transform==""){
                 val text = "No data!"
                 val duration = Toast.LENGTH_SHORT
                 val toast = Toast.makeText(activity, text, duration)
                 toast.show()
-                view.result_Text2.text=""
+                model.number_conv = ""
             }
             else {
                 var int_value = text_to_transform.toDouble()
@@ -197,8 +201,9 @@ class ViewFragment : Fragment() {
                         }
                     }
                 }
-
-                view.result_Text2.text = int_value.toString()
+                model.number_conv = int_value.toString()
+                refresh()
+               // view.result_Text2.text = int_value.toString()
             }
         }
 
