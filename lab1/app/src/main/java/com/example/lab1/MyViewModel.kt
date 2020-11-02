@@ -42,41 +42,35 @@ class MyViewModel : ViewModel() {
         return adapter_distance
     }
 
-    fun set_text(x: String,context: Context) {
+    fun set_text(x: String) : Boolean {
         val sb = StringBuilder()
         if(number.length!=12) {
             sb.append(number).append(x)
+            number = sb.toString()
+            return true;
         }
         else {
-            val text = "Max length!"
-            val duration = Toast.LENGTH_SHORT
-            val toast = Toast.makeText(context, text, duration)
-            toast.show()
+            return false
         }
     }
-    fun dot_press(context: Context){
+    fun dot_press() : String{
         var dot_counter = 0
         if(number.length==0){
-            val text = "Dot can't be the first symbol!"
-            val duration = Toast.LENGTH_SHORT
-            val toast = Toast.makeText(context, text, duration)
-            toast.show()
-            return
+            return "Dot can't be the first symbol!"
         }
         else{
             for(x in number){
                 if(x=='.')
                     dot_counter += 1
                 if(dot_counter==1){
-                    val text = "There can not be 2 dots"
-                    val duration = Toast.LENGTH_SHORT
-                    val toast = Toast.makeText(context, text, duration)
-                    toast.show()
-                    return
+                    return "There can not be 2 dots"
                 }
             }
         }
-        set_text(".", context)
+        if(!set_text(".")){
+            return  "Max length"
+        }
+        return "1"
     }
 
     fun x_press() {

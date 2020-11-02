@@ -1,15 +1,14 @@
 package com.example.lab1
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_keyboard.*
 import kotlinx.android.synthetic.main.fragment_keyboard.view.*
+import kotlinx.android.synthetic.main.fragment_view.view.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -47,53 +46,99 @@ class KeyboardFragment : Fragment() {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_keyboard, container, false)
 
+        fun refresh(){
+            (activity as MainActivity).refresh()
+                //vot tut bug drug
+        }
+
+        fun toast_maxlen(str : String) {
+            val text = str
+            val duration = Toast.LENGTH_SHORT
+            val toast = Toast.makeText(context, text, duration)
+            toast.show()
+        }
+
         view.button__1.setOnClickListener {
-            context?.let { it1 -> model.set_text("1", it1) }
+            if (!model.set_text("1")) {
+                toast_maxlen("Max length")
+            }
+            refresh()
         }
 
         view.button__2.setOnClickListener {
-            context?.let { it1 -> model.set_text("2", context = it1) }
+            if (!model.set_text("2")) {
+                toast_maxlen("Max length")
+            }
+            refresh()
         }
 
         view.button__3.setOnClickListener {
-            context?.let { it1 -> model.set_text("3", it1) }
+            if (!model.set_text("3")) {
+                toast_maxlen("Max length")
+            }
+            refresh()
         }
 
         view.button__4.setOnClickListener {
-            context?.let { it1 -> model.set_text("4", it1) }
+            if (!model.set_text("4")) {
+                toast_maxlen("Max length")
+            }
+            refresh()
         }
 
         view.button__5.setOnClickListener {
-            context?.let { it1 -> model.set_text("5", it1) }
+            if (!model.set_text("5")) {
+                toast_maxlen("Max length")
+            }
+            refresh()
         }
 
         view.button__6.setOnClickListener {
-            context?.let { it1 -> model.set_text("6", it1) }
+            if (!model.set_text("6")) {
+                toast_maxlen("Max length")
+            }
+            refresh()
         }
 
         view.button__7.setOnClickListener {
-            context?.let { it1 -> model.set_text("7", it1) }
+            if (!model.set_text("7")) {
+                toast_maxlen("Max length")
+            }
+            refresh()
         }
 
         view.button__8.setOnClickListener {
-            context?.let { it1 -> model.set_text("8", it1) }
+            if (!model.set_text("8")) {
+                toast_maxlen("Max length")
+            }
+            refresh()
         }
 
         view.button__9.setOnClickListener {
-            context?.let { it1 -> model.set_text("9", it1) }
+            if (!model.set_text("9")) {
+                toast_maxlen("Max length")
+            }
+            refresh()
         }
 
         view.button__0.setOnClickListener {
-            context?.let { it1 -> model.set_text("0", it1) }
+            if (!model.set_text("0")) {
+                toast_maxlen("Max length")
+            }
+            refresh()
         }
 
         view.button__x.setOnClickListener {
             model.x_press()
+            refresh()
         }
 
         view.button__dot.setOnClickListener {
-            context?.let { it1 -> model.dot_press(it1) }
-
+            var return_value = model.dot_press()
+            if(return_value != "1"){
+                toast_maxlen(return_value)
+            }
+            refresh()
         }
         return view
     }

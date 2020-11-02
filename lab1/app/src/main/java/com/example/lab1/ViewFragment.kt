@@ -31,6 +31,10 @@ class ViewFragment : Fragment() {
 
     private val model: MyViewModel by activityViewModels<MyViewModel>()
 
+    fun refresh(){
+        result_Text.text = model.number
+        result_Text2.text = model.number_conv
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -74,10 +78,6 @@ class ViewFragment : Fragment() {
             }
         }
 
-        fun refresh(){
-            view.result_Text.text = model.number
-            view.result_Text2.text = model.number_conv
-        }
 
         view.button_change.setOnClickListener {
             model.change()
