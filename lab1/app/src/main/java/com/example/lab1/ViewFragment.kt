@@ -125,7 +125,6 @@ class ViewFragment : Fragment() {
                 if(int_value!=null)
                 if(view.spinner_value.selectedItem.toString()=="Weight"){
                     if(view.spinner_choose2.selectedItem.toString()=="Gram"){
-                        if (int_value != null) {
                             if(view.spinner_choose.selectedItem.toString()=="Kilogram"){
                                 int_value /= 1000
                             } else if(view.spinner_choose.selectedItem.toString()=="Gram"){
@@ -133,7 +132,7 @@ class ViewFragment : Fragment() {
                             } else{
                                 int_value /= 1000000
                             }
-                        }
+
                     }
                     else if(view.spinner_choose2.selectedItem.toString()=="Kilogram"){
                         if(view.spinner_choose.selectedItem.toString()=="Kilogram"){
