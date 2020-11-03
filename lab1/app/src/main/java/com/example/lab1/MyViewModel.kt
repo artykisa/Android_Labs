@@ -11,6 +11,7 @@ class MyViewModel : ViewModel() {
 
     public var number = "1"
     public var number_conv = "1"
+    public var adapter = "0"
 
     fun get_adapter_weight(context: Context): ArrayAdapter<String> {
         val WeightList = context.getResources().getStringArray(R.array.Weight)

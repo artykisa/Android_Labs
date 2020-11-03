@@ -1,5 +1,7 @@
 package com.example.lab1
-
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +11,16 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import kotlinx.android.synthetic.full.fragment_view.view.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_view.*
 import kotlinx.android.synthetic.main.fragment_view.view.*
+import kotlinx.android.synthetic.main.fragment_view.view.button_change
+import kotlinx.android.synthetic.main.fragment_view.view.button_result
 import kotlinx.android.synthetic.main.fragment_view.view.result_Text
+import kotlinx.android.synthetic.main.fragment_view.view.spinner_choose
+import kotlinx.android.synthetic.main.fragment_view.view.spinner_choose2
+import kotlinx.android.synthetic.main.fragment_view.view.spinner_value
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,12 +37,15 @@ class ViewFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private val model: MyViewModel by activityViewModels<MyViewModel>()
+    private val model: MyViewModel? by activityViewModels<MyViewModel>()
 
     fun refresh(){
-        result_Text.text = model.number
-        result_Text2.text = model.number_conv
+        result_Text.text = model?.number
+        result_Text2.text = model?.number_conv
     }
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -58,70 +69,88 @@ class ViewFragment : Fragment() {
 
             override fun onItemSelected(
                 parentView: AdapterView<*>?,
-                selectedItemView: View,
+                selectedItemView: View?,
                 position: Int,
                 id: Long
             ) {
                 if (view.spinner_value.selectedItem.toString() == "Weight") {
-                    val adapter_weight= context?.let { model.get_adapter_weight(it) }
+                    val adapter_weight= context?.let { model?.get_adapter_weight(it) }
                     view.spinner_choose.adapter = adapter_weight
                     view.spinner_choose2.adapter = adapter_weight
+                    model?.adapter = "0"
                 } else if (view.spinner_value.selectedItem.toString() == "Distance") {
-                    val adapter_distance= context?.let { model.get_adapter_distance(it) }
+                    val adapter_distance= context?.let { model?.get_adapter_distance(it) }
                     view.spinner_choose.adapter = adapter_distance
                     view.spinner_choose2.adapter = adapter_distance
+                    model?.adapter = "1"
                 } else {
-                    val adapter_curency= context?.let { model.get_adapter_currency(it) }
+                    val adapter_curency= context?.let { model?.get_adapter_currency(it) }
                     view.spinner_choose.adapter = adapter_curency
                     view.spinner_choose2.adapter = adapter_curency
+                    model?.adapter = "2"
                 }
             }
         }
 
 
         view.button_change.setOnClickListener {
-            model.change()
+            model?.change()
             refresh()
             // add for spinner
         }
 
 
-
+        view.button_copy1.setOnClickListener{
+            var myClipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            var myClip: ClipData = ClipData.newPlainText("note_copy", model?.number)
+            myClipboard.setPrimaryClip(myClip)
+        }
+        view.button_copy2.setOnClickListener{
+            var myClipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            var myClip: ClipData = ClipData.newPlainText("note_copy", model?.number_conv)
+            myClipboard.setPrimaryClip(myClip)
+        }
         view.button_result.setOnClickListener {
-            var text_to_transform = model.number
+            var text_to_transform = model?.number
+
             if(text_to_transform==""){
                 val text = "No data!"
                 val duration = Toast.LENGTH_SHORT
                 val toast = Toast.makeText(activity, text, duration)
                 toast.show()
-                model.number_conv = ""
+                model?.number_conv = ""
             }
             else {
-                var int_value = text_to_transform.toDouble()
+                var int_value = text_to_transform?.toDouble()
+                if(int_value!=null)
                 if(view.spinner_value.selectedItem.toString()=="Weight"){
                     if(view.spinner_choose2.selectedItem.toString()=="Gram"){
-                        if(view.spinner_choose.selectedItem.toString()=="Kilogram"){
-                            int_value /= 1000
-                        }
-                        else if(view.spinner_choose.selectedItem.toString()=="Gram"){
-                            int_value = int_value
-                        }
-                        else{
-                            int_value /= 1000000
+                        if (int_value != null) {
+                            if(view.spinner_choose.selectedItem.toString()=="Kilogram"){
+                                int_value /= 1000
+                            } else if(view.spinner_choose.selectedItem.toString()=="Gram"){
+                                int_value = int_value
+                            } else{
+                                int_value /= 1000000
+                            }
                         }
                     }
                     else if(view.spinner_choose2.selectedItem.toString()=="Kilogram"){
                         if(view.spinner_choose.selectedItem.toString()=="Kilogram"){
                             int_value = int_value
                         }
-                        else if(view.spinner_choose.selectedItem.toString()=="Gram"){
-                            int_value = int_value * 1000
-                        }
-                        else{
-                            int_value /= 1000
+                        else if (int_value != null) {
+                            if(view.spinner_choose.selectedItem.toString()=="Gram"){
+                                if (int_value != null) {
+                                    int_value = int_value * 1000
+                                }
+                            } else{
+                                int_value /= 1000
+                            }
                         }
                     }
                     else{
+                        if(int_value!=null)
                         if(view.spinner_choose.selectedItem.toString()=="Kilogram"){
                             int_value /= 1000
                         }
@@ -201,7 +230,7 @@ class ViewFragment : Fragment() {
                         }
                     }
                 }
-                model.number_conv = int_value.toString()
+                model?.number_conv = int_value.toString()
                 refresh()
                // view.result_Text2.text = int_value.toString()
             }
