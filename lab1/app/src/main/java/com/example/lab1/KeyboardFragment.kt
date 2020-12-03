@@ -48,7 +48,6 @@ class KeyboardFragment : Fragment() {
 
         fun refresh(){
             (activity as MainActivity).refresh()
-                //vot tut bug drug
         }
 
         fun toast_maxlen(str : String) {

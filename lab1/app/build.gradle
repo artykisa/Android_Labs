@@ -1,9 +1,25 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+buildscript {
+    repositories{
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.ajoberstar:grgit:1.5.0'
+    }
+}
+import org.ajoberstar.grgit.Grgit
 
 
+ext{
+    git = Grgit.open(currentDir: projectDir)
+    gitVersionName = git.describe()
+    gitVersionCode = git.tag.list().size()
+}
 android {
+
     signingConfigs {
 
     full_premium {
@@ -18,9 +34,8 @@ android {
         applicationId "com.example.lab1"
         minSdkVersion 14
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-
+        versionCode gitVersionCode
+        versionName gitVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -31,9 +46,7 @@ android {
             debuggable true
             signingConfig signingConfigs.debug
         }
-//        premiun {
-//
-//        }
+
     }
     flavorDimensions "version"
     productFlavors {
@@ -80,6 +93,7 @@ android {
 }
 
 dependencies {
+    implementation 'org.ajoberstar.grgit:grgit-core:4.1.0'
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.1.0'

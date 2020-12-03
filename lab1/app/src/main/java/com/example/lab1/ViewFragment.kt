@@ -60,6 +60,7 @@ class ViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val activity = activity as MainActivity
+
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_view, container, false)
         view.spinner_value.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
