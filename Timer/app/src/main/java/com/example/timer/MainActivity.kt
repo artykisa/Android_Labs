@@ -2,84 +2,91 @@ package com.example.timer
 
 
 import android.annotation.SuppressLint
-import android.content.pm.ResolveInfo
-import android.graphics.Color
-import android.media.AudioManager
-import android.media.MediaPlayer
-import android.media.SoundPool
+import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.ViewModelProviders
 
 class MainActivity : AppCompatActivity() {
-    var START_MILLI_SECONDS = 60000L
-
-    lateinit var countdown_timer: CountDownTimer
-    var isRunning: Boolean = false;
-    var time_in_milli_seconds = 0L
+    lateinit var mainViewModel: MainViewModel
+    var MAIN_FRAGMENT_TAG="MAIN_ACTIVITY_LIST"
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var resID = getResources().openRawResource(1)
-        button.setOnClickListener {
-            if (isRunning) {
-                pauseTimer()
-            } else {
-                val time  = time_edit_text.text.toString()
-                time_in_milli_seconds = time.toLong() *60000L
-                startTimer(time_in_milli_seconds)
-            }
+        mainViewModel = ViewModelProviders.of(this,mainFactory(application)).get(MainViewModel::class.java)
+
+    }
+    @SuppressLint("ResourceType")
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.xml.menu, menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==R.id.settings) {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivityForResult(intent, 1)
         }
-
-        reset.setOnClickListener {
-            resetTimer()
-        }
-    }
-    private fun pauseTimer() {
-
-        button.text = "Start"
-        countdown_timer.cancel()
-        isRunning = false
-        reset.visibility = View.VISIBLE
-    }
-
-    private fun startTimer(time_in_seconds: Long) {
-        countdown_timer = object : CountDownTimer(time_in_seconds, 1000) {
-            override fun onFinish() {
-                //here is sound
-
-
-
-            }
-
-            override fun onTick(p0: Long) {
-                time_in_milli_seconds = p0
-                updateTextUI()
-            }
-        }
-        countdown_timer.start()
-
-        isRunning = true
-        button.text = "Pause"
-        reset.visibility = View.INVISIBLE
+        return super.onOptionsItemSelected(item)
 
     }
-
-    private fun resetTimer() {
-        time_in_milli_seconds = START_MILLI_SECONDS
-        updateTextUI()
-        reset.visibility = View.INVISIBLE
+    fun Start(v:View){
+        val intent=Intent(this,TimerActivity::class.java)
+        intent.putExtra("exeId",mainViewModel.exersice!!.id)
+        startActivity(intent)
+    }
+    fun AddExe(v:View){
+        val intent=Intent(this,AddExeActivity::class.java)
+        startActivity(intent)
+    }
+    fun AllExes(v:View){
+        val intent=Intent(this,ExeActivity::class.java)
+        startActivityForResult(intent,1)
     }
 
-    private fun updateTextUI() {
-        val minute = (time_in_milli_seconds / 1000) / 60
-        val seconds = (time_in_milli_seconds / 1000) % 60
-
-        timer.text = "$minute:$seconds"
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(data==null){return}
+        val currActivity=data.getIntExtra("exeId",1)
+        Toast.makeText(this,currActivity.toString(), Toast.LENGTH_SHORT).show()
+        mainViewModel.renewExercise(currActivity)
+        val ft=supportFragmentManager.beginTransaction()
+        var fragment=supportFragmentManager.findFragmentByTag(MAIN_FRAGMENT_TAG)
+        if(fragment!=null)
+            ft.remove(fragment)
+        fragment=MainFragment.newInstance()
+        ft.add(R.id.main_activities,fragment,MAIN_FRAGMENT_TAG)
+        ft.commit()
+        mainViewModel.subscibe(fragment)
+        fragment.setCRUDListner(mainViewModel)
     }
 
+    override fun onStart() {
+        super.onStart()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        mainViewModel.checkactivity()
+        val ft=supportFragmentManager.beginTransaction()
+        var fragment=supportFragmentManager.findFragmentByTag( MAIN_FRAGMENT_TAG)
+        if(fragment!=null)
+            ft.remove(fragment)
+        fragment=MainFragment.newInstance()
+        ft.add(R.id.main_activities,fragment,MAIN_FRAGMENT_TAG)
+        ft.commit()
+        //showSplashScreen()
+        mainViewModel.subscibe(fragment)
+        fragment.setCRUDListner(mainViewModel)
+        findViewById<Button>(R.id.btn2).invalidate()
+
+    }
 }

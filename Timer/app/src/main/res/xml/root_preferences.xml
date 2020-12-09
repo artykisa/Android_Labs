@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:defaultValue="day"
+        android:entries="@array/theme_titles"
+        android:entryValues="@array/theme_values"
+        android:key="sync_theme"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/change_theme" />
+
+
+    <SwitchPreferenceCompat
+        android:key="clean_data"
+        android:title="@string/clean_all"/>
+    <ListPreference
+        android:defaultValue="big"
+        android:entries="@array/pref_market_titles"
+        android:entryValues="@array/pref_market_values"
+        android:key="sync_frequency"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/change_font" />
+
+    <ListPreference
+        android:defaultValue="eng"
+        android:entries="@array/languages_titles"
+        android:entryValues="@array/languages_values"
+        android:key="sync_lang"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/change_lan" />
+</PreferenceScreen>

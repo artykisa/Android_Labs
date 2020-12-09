@@ -1,14 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Timer</string>
-    <string name="title_activity_settings" translatable="false">SettingsActivity</string>
     <string name="begin_btn">Start</string>
 
     <string name="run">Run</string>
-    <string name="lang">RU\ENG</string>
+    <string name= "lang">RU\ENG</string>
     <string-array name="activity_type">
-        <item>Rest</item>
-        <item>workout</item>
-        <item>cooldown</item>
+        <item >Rest</item>
+        <item >workout</item>
+        <item >cooldown</item>
         <item>Warm-up</item>
     </string-array>
     <string name="change_theme">Change theme</string>
@@ -18,12 +18,7 @@
     <string name="duration">Duration</string>
     <string name="repetition">Repetitions</string>
     <string name="clean_all">Clean all</string>
-    <string name="title_activity_exe" translatable="false">ExeActivity</string>
-    <string name="title_activity_exercise" translatable="false">ExerciseActivity</string>
-    <string name="title_activity_exersice" translatable="false">ExersiceActivity</string>
-    <string name="title_activity_timer" translatable="false">TimerActivity</string>
     <string name="settings">Settings</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_add_exe">AddExeActivity</string>
     <!-- Strings used for fragments for navigation -->
@@ -31,7 +26,6 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="start">Start</string>
     <string name="add">Add</string>
     <string name="list">List</string>
     <string name="hello_first_fragment">Hello first fragment</string>
@@ -39,9 +33,8 @@
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
-    -->
+    --><string name="start">Start</string>
     <string name="hello_world">Hello Square World!</string>
-    <string name="title_activity_splash">SplashActivity</string>
     <string name="drop">Drop</string>
-    <string name="pause">Drop</string>
+    <string name="pause">Pause</string>
 </resources>
