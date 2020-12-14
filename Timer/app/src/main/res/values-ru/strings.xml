@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Таймер</string>
+    <string name="begin_btn">Старт</string>
+
+    <string name="run">Бег</string>
+    <string name= "lang">Рус\Англ</string>
+    <string-array name="activity_type">
+        <item >Перерыв</item>
+        <item name="workout">Тренировка</item>
+        <item name="cooldown">Отдых</item>
+        <item name="warm_up">Разминка</item>
+    </string-array>
+    <string name="change_theme">Изменить тему</string>
+    <string name="change_lan">Изменить язык</string>
+    <string name="change_font">Изменить шрифт</string>
+    <string name="rest">Пауза</string>
+    <string name="duration">Длительность</string>
+    <string name="repetition">Повторения</string>
+    <string name="clean_all">Удалить данные</string>
+    <string name="settings">Настройки</string>
+    <string name="hello_blank_fragment">Пустой фрагмент</string>
+    <string name="title_activity_add_exe">Добавить упражнение</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Первый фрагмент</string>
+    <string name="add">Добавить</string>
+    <string name="list">Список</string>
+    <string name="second_fragment_label">Второй фрагмент</string>
+    <string name="next">Следующий</string>
+    <string name="previous">Предыдущий</string>
+    <string name="start">Старт</string>
+    <string name="hello_first_fragment">Привет первый фрагмент</string>
+    <string name="hello_second_fragment">Привет второй фрагмент. Arg: %1$s</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Привет квадратынй мир!</string>
+    <string name="drop">Сначала</string>
+    <string name="pause">Пауза</string>
+</resources>
