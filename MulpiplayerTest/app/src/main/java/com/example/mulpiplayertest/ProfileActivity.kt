@@ -12,9 +12,12 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.IOException
+import com.squareup.picasso.Picasso
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -25,6 +28,7 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var btn_choosefile:Button
     lateinit var btn_uploadfile:Button
     lateinit var btn_save:Button
+    private lateinit var btn_gravatar: Button
     lateinit var tvFileName:TextView
     private var fileUri: Uri? = null
     private var bitmap: Bitmap? = null
@@ -42,6 +46,7 @@ class ProfileActivity : AppCompatActivity() {
     fun setupUI(){
         tvFileName =findViewById<TextView>(R.id.tvFileName)
         imgFile = findViewById(R.id.imgFile)
+        btn_gravatar= findViewById(R.id.gravatarButton)
         editName = findViewById(R.id.editName)
         editName.setText(user?.displayName)
         editFileName = findViewById(R.id.edtFileName)
@@ -52,6 +57,13 @@ class ProfileActivity : AppCompatActivity() {
             showChoosingFile()
         }
 
+        btn_gravatar.setOnClickListener {
+            val hash = utility.algo_MD5(Firebase.auth.currentUser?.email!!)
+            val gravatarUrl = "https://s.gravatar.com/avatar/$hash?s=80"
+            Picasso.with(applicationContext)
+                .load(gravatarUrl)
+                .into(imgFile)
+        }
         btn_save.setOnClickListener {
             var nick = editName.text.toString()
             if(nick.equals("")){

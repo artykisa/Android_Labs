@@ -14,7 +14,12 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="Save" />
-
+    <Button
+        android:id="@+id/gravatarButton"
+        android:layout_width="match_parent"
+        android:layout_marginTop="300dp"
+        android:layout_height="wrap_content"
+        android:text="gravatar" />
     <EditText
         android:id="@+id/editName"
         android:layout_width="wrap_content"
