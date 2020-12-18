@@ -10,10 +10,12 @@ import android.util.Log
 import android.webkit.MimeTypeMap
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import org.w3c.dom.Text
 import java.io.IOException
+
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -27,6 +29,8 @@ class ProfileActivity : AppCompatActivity() {
     private var fileUri: Uri? = null
     private var bitmap: Bitmap? = null
     lateinit  var editFileName:EditText
+    lateinit  var editName:EditText
+    var user = FirebaseAuth.getInstance().currentUser
     lateinit var imgFile:ImageView
     private var imageReference: StorageReference? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +42,8 @@ class ProfileActivity : AppCompatActivity() {
     fun setupUI(){
         tvFileName =findViewById<TextView>(R.id.tvFileName)
         imgFile = findViewById(R.id.imgFile)
+        editName = findViewById(R.id.editName)
+        editName.setText(user?.displayName)
         editFileName = findViewById(R.id.edtFileName)
         btn_choosefile = findViewById(R.id.btn_choose_file)
         btn_uploadfile = findViewById(R.id.btn_upload_file)
@@ -47,7 +53,27 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         btn_save.setOnClickListener {
+            var nick = editName.text.toString()
+            if(nick.equals("")){
+                Toast.makeText(this, "Write some name!", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                val user = FirebaseAuth.getInstance().currentUser
 
+                val profileUpdates = UserProfileChangeRequest.Builder()
+                    .setDisplayName(nick).build()
+
+                user!!.updateProfile(profileUpdates)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d(TAG, "User profile updated.")
+                            Toast.makeText(this,"Profile updated!",Toast.LENGTH_SHORT).show()
+                        }
+                        else{
+                            Toast.makeText(this,"Error in profile update!",Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            }
         }
         btn_uploadfile.setOnClickListener {
             uploadFile()
