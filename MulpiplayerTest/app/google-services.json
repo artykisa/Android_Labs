@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "4171063769",
+    "project_id": "gane-b6769",
+    "storage_bucket": "gane-b6769.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4171063769:android:f3d04f9f05417a9b8d39c8",
+        "android_client_info": {
+          "package_name": "com.example.mulpiplayertest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4171063769-q33kbqif636nlgsta0tinmch18rucljk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuLywQX40au7BsM3XN4KH9oiR3__CMatk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "4171063769-q33kbqif636nlgsta0tinmch18rucljk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
